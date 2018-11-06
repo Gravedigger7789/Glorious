@@ -1,6 +1,7 @@
 # Ignore Non Sharable Sounds/Assets
 Assets/*
-Sounds/*
+Sound/*
+Music/*
 
 # Godot-specific ignores
 .import/
