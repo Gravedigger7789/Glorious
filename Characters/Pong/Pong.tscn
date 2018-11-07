@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Characters/Pong/Pong.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 16, 64 )
+
+[node name="Pong" type="KinematicBody2D"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 4
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision" ]
+walk_speed = 450
+
+[node name="ColorRect" type="ColorRect" parent="." index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -16.0
+margin_top = -64.0
+margin_right = 16.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 1, 1, 1, 1 )
+_sections_unfolded = [ "Margin" ]
+
+[node name="BallCollision" type="KinematicBody2D" parent="." index="1"]
+
+input_pickable = false
+collision_layer = 0
+collision_mask = 8
+collision/safe_margin = 0.08
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BallCollision" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( 0, -64, -16, -48, -16, 48, 0, 64, 16, 48, 16, -48 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+
+shape = SubResource( 1 )
+
+

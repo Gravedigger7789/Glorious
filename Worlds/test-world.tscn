@@ -3,7 +3,7 @@
 [ext_resource path="res://Characters/Platformer/Platformer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tilesets/test-tiles.tres" type="TileSet" id=2]
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node" index="0"]
 
 [node name="Platformer" parent="." index="0" instance=ExtResource( 1 )]
 
