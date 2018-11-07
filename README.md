@@ -11,7 +11,7 @@ All scripts and scene files are distributed under the [MIT license](LICENSE).
 
 ### Godot Engine
 
-Created with the Godot Engine licensed under the [MIT license](Godot-Engine_LICENSE.md)
+[Godot Engine](https://godotengine.org/) licensed under the [MIT license](Godot-Engine_LICENSE.md)
 
 * Copyright (c) 2007-2018 Juan Linietsky, Ariel Manzur.
 * Copyright (c) 2014-2018 Godot Engine contributors (cf. https://github.com/godotengine/godot/blob/master/AUTHORS.md)
