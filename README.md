@@ -27,7 +27,7 @@ Created with the Godot Engine licensed under the [MIT license](Godot-Engine_LICE
 
 ### Fonts
 
-[Poor Story](Fonts/PoorStory-Regular.ttf) Font licensed under [Open Font License](PoorStory-Regular_LICENSE.md)
+[Poor Story](Fonts/PoorStory-Regular.ttf) Font licensed under [Open Font License](Fonts/PoorStory-Regular_LICENSE.md)
 
 * Copyright (c) YoonDesign Inc. All Rights Reserved.
 * License: SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
