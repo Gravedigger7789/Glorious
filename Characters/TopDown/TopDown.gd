@@ -29,20 +29,20 @@ func _physics_process(delta):
 func apply_movement(delta):
 	# Moving
 	var target_speed = Vector2()
-	if Input.is_action_pressed('move_left'):
-		target_speed.x += -1
-		facing_direction = direction.LEFT
-	if Input.is_action_pressed('move_right'):
-		target_speed.x +=  1
-		facing_direction = direction.RIGHT
+	if Input.is_action_pressed('move_up'):
+		target_speed.y += -1
+		facing_direction = direction.UP
+	if Input.is_action_pressed('move_down'):
+		target_speed.y +=  1
+		facing_direction = direction.DOWN
 
-	if target_speed.x == 0:
-		if Input.is_action_pressed('move_up'):
-			target_speed.y += -1
-			facing_direction = direction.UP
-		if Input.is_action_pressed('move_down'):
-			target_speed.y +=  1
-			facing_direction = direction.DOWN
+	if target_speed.y == 0:
+		if Input.is_action_pressed('move_left'):
+			target_speed.x += -1
+			facing_direction = direction.LEFT
+		if Input.is_action_pressed('move_right'):
+			target_speed.x +=  1
+			facing_direction = direction.RIGHT
 
 	target_speed *= walk_speed
 
