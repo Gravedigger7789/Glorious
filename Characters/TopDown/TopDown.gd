@@ -8,10 +8,8 @@ const MIN_ONAIR_TIME = 0.1
 const ATTACK_TIME_SHOW_WEAPON = 0.2
 const BULLET_VELOCITY = 1000
 
-enum direction { RIGHT, DOWN, LEFT, UP }
-
 var linear_velocity = Vector2()
-var facing_direction = direction.RIGHT
+var facing_direction = Vector2()
 var sprite_scale = Vector2(1,1)
 var last_attack_time = 1
 var on_floor = false
@@ -27,33 +25,13 @@ func _physics_process(delta):
 	update_animations()
 
 func apply_movement(delta):
-	# Moving
-	var target_speed = Vector2()
-	if Input.is_action_pressed('move_up'):
-		target_speed.y += -1
-		facing_direction = direction.UP
-	if Input.is_action_pressed('move_down'):
-		target_speed.y +=  1
-		facing_direction = direction.DOWN
-
-	if target_speed.y == 0:
-		if Input.is_action_pressed('move_left'):
-			target_speed.x += -1
-			facing_direction = direction.LEFT
-		if Input.is_action_pressed('move_right'):
-			target_speed.x +=  1
-			facing_direction = direction.RIGHT
-
-	target_speed *= walk_speed
-
-	match facing_direction:
-		direction.LEFT, direction.RIGHT:
-			linear_velocity.x = lerp(linear_velocity.x, target_speed.x, 0.1)
-			linear_velocity.y = 0
-		direction.UP, direction.DOWN:
-			linear_velocity.x = 0
-			linear_velocity.y = lerp(linear_velocity.y, target_speed.y, 0.1)
+	var input_direction = Vector2()
+	input_direction.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
+	input_direction.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
+	if input_direction != Vector2.ZERO:
+		facing_direction = input_direction
 	
+	linear_velocity = input_direction.normalized() * walk_speed
 	linear_velocity = move_and_slide(linear_velocity, FLOOR_NORMAL, SLOPE_SLIDE_STOP)
 	on_floor = is_on_floor()
 
@@ -69,11 +47,11 @@ func update_animations():
 
 func set_direction():
 	var new_scale = Vector2(1,1)
-	if facing_direction == direction.LEFT:
+	if facing_direction.x < 0:
 		new_scale.x = -1
-	if facing_direction == direction.UP:
+	if facing_direction.y < 0:
 		new_scale.y = -1
-	sprite.set_scale(Vector2(new_scale))
+	sprite.set_scale(Vector2(new_scale.x, new_scale.y))
 
 func _input(event):
 	if event.is_action_pressed('attack'):
@@ -82,7 +60,7 @@ func _input(event):
 			var sword = preload("res://Weapons/Sword.tscn").instance()
 			#sword.position = $Sprite/SwordPosition.global_position
 			#print($Sprite/SwordPosition.global_position)
-			if facing_direction == direction.UP || facing_direction == direction.DOWN:
+			if facing_direction.y != 0:
 				$Sprite/SwordPosition2.add_child(sword)
 			else:
 				$Sprite/SwordPosition.add_child(sword)
