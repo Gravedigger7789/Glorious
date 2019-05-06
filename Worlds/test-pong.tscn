@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Tilesets/test-tiles.tres" type="TileSet" id=1]
-[ext_resource path="res://default_theme.tres" type="Theme" id=2]
-[ext_resource path="res://Characters/Pong/Pong.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Characters/Pong/PongEnemy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Weapons/PongBall.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Worlds/PongGUI.gd" type="Script" id=2]
+[ext_resource path="res://default_theme.tres" type="Theme" id=3]
+[ext_resource path="res://Characters/Pong/Pong.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Characters/Pong/PongEnemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Weapons/PongBall.tscn" type="PackedScene" id=6]
 
 [node name="Node" type="Node"]
 
@@ -32,7 +33,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="GUI" type="Control" parent="." index="1"]
+[node name="PongGUI" type="Control" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -44,8 +45,9 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+script = ExtResource( 2 )
 
-[node name="Background" type="ColorRect" parent="GUI" index="0"]
+[node name="Background" type="ColorRect" parent="PongGUI" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -62,7 +64,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="VerticleBar" type="ColorRect" parent="GUI" index="1"]
+[node name="VerticleBar" type="ColorRect" parent="PongGUI" index="1"]
 
 anchor_left = 0.5
 anchor_top = 0.0
@@ -77,12 +79,12 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 1, 1, 1, 0.5 )
-_sections_unfolded = [ "Margin" ]
+_sections_unfolded = [ "Anchor", "Margin" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="LeftScore" type="Label" parent="GUI" index="2"]
+[node name="LeftScore" type="Label" parent="PongGUI" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -98,14 +100,14 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-theme = ExtResource( 2 )
+theme = ExtResource( 3 )
 text = "1"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Margin", "Theme" ]
 
-[node name="RightScore" type="Label" parent="GUI" index="3"]
+[node name="RightScore" type="Label" parent="PongGUI" index="3"]
 
 anchor_left = 1.0
 anchor_top = 0.0
@@ -120,23 +122,25 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-theme = ExtResource( 2 )
+theme = ExtResource( 3 )
 text = "2"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Margin", "Theme" ]
 
-[node name="Pong" parent="." index="2" instance=ExtResource( 3 )]
+[node name="Pong" parent="." index="2" instance=ExtResource( 4 )]
 
 position = Vector2( 160, 352 )
 
-[node name="PongEnemy" parent="." index="3" instance=ExtResource( 4 )]
+[node name="PongEnemy" parent="." index="3" instance=ExtResource( 5 )]
 
 position = Vector2( 1120, 352 )
 
-[node name="PongBall" parent="." index="4" instance=ExtResource( 5 )]
+[node name="PongBall" parent="." index="4" instance=ExtResource( 6 )]
 
 position = Vector2( 192, 96 )
+
+[connection signal="scored" from="PongBall" to="PongGUI" method="_on_PongBall_scored"]
 
 
