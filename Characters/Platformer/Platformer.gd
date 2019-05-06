@@ -19,6 +19,7 @@ var animation=''
 
 onready var animation_player = $AnimationPlayer
 onready var sprite = $Sprite
+onready var health = $Health
 
 func _physics_process(delta):
 	last_attack_time += delta
@@ -82,6 +83,7 @@ func set_direction():
 
 func _input(event):
 	if event.is_action_pressed('attack'):
+		damage(1)
 		if $AttackCooldown.is_stopped():
 			$AttackCooldown.start()
 			var bullet = preload("res://Weapons/Bullet.tscn").instance()
@@ -91,3 +93,9 @@ func _input(event):
 			get_parent().add_child(bullet)
 			#$sound_shoot.play()
 			last_attack_time = 0
+
+func damage(amount):
+	health.take_damage(amount)
+
+func _on_Health_health_depleted():
+	self.queue_free()
