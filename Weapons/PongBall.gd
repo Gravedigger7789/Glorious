@@ -11,6 +11,7 @@ func _ready():
 
 func _physics_process(delta):
 	apply_movement(delta)
+	update()
 	if position.x < 0:
 		emit_signal("scored", "right") 
 		reset() 
@@ -18,6 +19,9 @@ func _physics_process(delta):
 	if position.x > get_viewport_rect().size.x:
 		emit_signal("scored", "left") 
 		reset()
+
+func _draw():
+	draw_circle(Vector2.ZERO, 16, Color.white)
 
 func apply_movement(delta):
 	var collision = move_and_collide(velocity * delta)
