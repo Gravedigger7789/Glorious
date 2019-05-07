@@ -8,9 +8,9 @@ const SLOPE_SLIDE_STOP = 5.0
 var linear_velocity = Vector2()
 
 func _physics_process(delta):
-	apply_movement(delta)
+	apply_movement()
 
-func apply_movement(delta):
+func apply_movement():
 	# Moving
 	var target_speed = Vector2()
 	if Input.is_action_pressed('move_up'):
