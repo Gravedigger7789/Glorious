@@ -3,12 +3,16 @@ extends KinematicBody2D
 const BULLET_VELOCITY := 1000
 
 var sprite_scale := Vector2(1,1)
+var look_direction = Vector2(1, 0) setget set_direction
 
 onready var animation_player := $AnimationPlayer
 onready var sprite := $Sprite
 onready var health := $Health
 
 func set_direction(direction: Vector2) -> void:
+	if look_direction == direction:
+		return
+	look_direction = direction
 	var new_scale := direction.x
 	if new_scale == 0:
 		new_scale = sprite_scale.x

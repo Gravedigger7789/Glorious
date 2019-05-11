@@ -21,14 +21,11 @@ func initialize(start_state: String) -> void:
 	current_state = states_stack[0]
 	current_state.enter()
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	current_state.handle_input(event)
 
 func _physics_process(delta: float) -> void:
 	current_state.update(delta)
-
-func _on_animation_finished(anim_name: String) -> void:
-	current_state._on_animation_finished(anim_name)
 
 func _on_change_state(state_name: String) -> void:
 	current_state.exit()
