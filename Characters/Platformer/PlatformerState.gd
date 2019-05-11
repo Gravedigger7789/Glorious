@@ -27,6 +27,7 @@ func get_input_direction() -> Vector2:
 		owner.look_direction = input_direction
 	return input_direction
 
+# warning-ignore:unused_argument
 func update(delta) -> void:
 	apply_gravity()
 	move()

@@ -16,8 +16,8 @@ func _ready() -> void:
 			states_map[child.state_name] = child
 	initialize(START_STATE)
 
-func initialize(start_state: String) -> void:
-	states_stack.push_front(states_map[START_STATE])
+func initialize(state: String) -> void:
+	states_stack.push_front(states_map[state])
 	current_state = states_stack[0]
 	current_state.enter()
 
