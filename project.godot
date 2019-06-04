@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Platformer",
+"language": "GDScript",
+"path": "res://Characters/Platformer/Platformer.gd"
+}, {
 "base": "State",
 "class": "PlatformerState",
 "language": "GDScript",
@@ -25,6 +30,7 @@ _global_script_classes=[ {
 "path": "res://StateMachine/StateMachine.gd"
 } ]
 _global_script_class_icons={
+"Platformer": "",
 "PlatformerState": "",
 "State": "",
 "StateMachine": ""

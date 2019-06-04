@@ -29,14 +29,14 @@ func _physics_process(delta: float) -> void:
 
 func _on_change_state(state_name: String) -> void:
 	current_state.exit()
-	
+
 	if state_name == "previous":
 		states_stack.pop_front()
 	else:
 		states_stack[0] = states_map[state_name]
-	
+
 	current_state = states_stack[0]
 	emit_signal("state_changed", current_state)
-	
+
 	if state_name != "previous":
 		current_state.enter()

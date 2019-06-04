@@ -7,15 +7,15 @@ func _init() -> void:
 	state_name = "jump"
 
 func enter() -> void:
-	velocity.y = -jump_speed
+	if "velocity" in owner:
+		owner.velocity.y = -jump_speed
 	.enter()
 
-func update(delta: float) -> void:
-	var input_direction := get_input_direction()
-	velocity.x = input_direction.x * air_speed
-	.update(delta)
-	if owner is KinematicBody2D:
-		if owner.is_on_floor():
+func update(_delta: float) -> void:
+	move(air_speed)
+	if owner is KinematicBody2D \
+	and owner.is_on_floor():
 			emit_signal("change_state", "idle")
-	if velocity.y > 0:
-		emit_signal("change_state", "fall")
+	if "velocity" in owner \
+	and owner.velocity.y > 0:
+			emit_signal("change_state", "fall")

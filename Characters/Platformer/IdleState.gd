@@ -9,10 +9,9 @@ func handle_input(event: InputEvent) -> void:
 		emit_signal("change_state", "jump")
 	.handle_input(event)
 
-func update(delta: float) -> void:
-	var input_direction := get_input_direction()
-	if input_direction:
+func update(_delta: float) -> void:
+	if get_input_direction():
 		emit_signal("change_state", "move")
-	.update(delta)
-	if velocity.y > 0:
-		emit_signal("change_state", "fall")
+	if "velocity" in owner \
+	and owner.velocity.y > 0:
+			emit_signal("change_state", "fall")

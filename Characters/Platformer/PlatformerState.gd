@@ -1,12 +1,9 @@
 extends State
 class_name PlatformerState
 
-const FLOOR_NORMAL := Vector2(0, -1)
-const SLOPE_SLIDE_STOP := 25.0
-
-var gravity := 16
-var terminal_velocity := 750
-var velocity := Vector2()
+func _ready() -> void:
+	if !owner is Platformer:
+		push_error("States owner must be of type Platformer")
 
 #func enter():
 	#print(state_name)
@@ -27,15 +24,7 @@ func get_input_direction() -> Vector2:
 		owner.look_direction = input_direction
 	return input_direction
 
-# warning-ignore:unused_argument
-func update(delta) -> void:
-	apply_gravity()
-	move()
-
-func apply_gravity() -> void:
-	velocity.y += gravity
-	velocity.y = min(terminal_velocity, velocity.y)
-
-func move() -> void:
-	if owner is KinematicBody2D:
-		velocity = owner.move_and_slide(velocity, FLOOR_NORMAL, SLOPE_SLIDE_STOP)
+func move(speed: float) -> void:
+	if "velocity" in owner:
+		var input_direction := get_input_direction()
+		owner.velocity.x = input_direction.x * speed

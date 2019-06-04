@@ -11,11 +11,10 @@ func handle_input(event: InputEvent) -> void:
 		emit_signal("change_state", "jump")
 	.handle_input(event)
 
-func update(delta: float) -> void:
-	var input_direction := get_input_direction()
-	if not input_direction:
-		emit_signal("change_state", "idle")
-	velocity.x = input_direction.x * walk_speed
-	.update(delta)
-	if velocity.y > 0:
-		emit_signal("change_state", "fall")
+func update(_delta: float) -> void:
+	move(walk_speed)
+	if "velocity" in owner:
+		if abs(owner.velocity.x) <= 0:
+			emit_signal("change_state", "idle")
+		if owner.velocity.y > 0:
+			emit_signal("change_state", "fall")
