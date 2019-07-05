@@ -1,10 +1,15 @@
 extends PlatformerState
 
-export (int) var jump_speed := 450
-export (int) var air_speed := 450
+var jump_speed := 450
+var air_speed := 450
 
 func _init() -> void:
 	state_name = "jump"
+
+func _ready() -> void:
+	jump_speed = owner.jump_speed if "jump_speed" in owner else jump_speed
+	air_speed = owner.air_speed if "air_speed" in owner else air_speed
+	._ready()
 
 func enter() -> void:
 	if "velocity" in owner:

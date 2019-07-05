@@ -3,7 +3,8 @@ class_name StateMachine
 
 signal state_changed(currentState)
 
-export (String) var START_STATE = "idle"
+const START_STATE := "idle"
+const PREVIOUS_STATE := "previous"
 
 var states_map = {}
 var states_stack = []
@@ -30,7 +31,7 @@ func _physics_process(delta: float) -> void:
 func _on_change_state(state_name: String) -> void:
 	current_state.exit()
 
-	if state_name == "previous":
+	if state_name == PREVIOUS_STATE:
 		states_stack.pop_front()
 	else:
 		states_stack[0] = states_map[state_name]
@@ -38,5 +39,5 @@ func _on_change_state(state_name: String) -> void:
 	current_state = states_stack[0]
 	emit_signal("state_changed", current_state)
 
-	if state_name != "previous":
+	if state_name != PREVIOUS_STATE:
 		current_state.enter()

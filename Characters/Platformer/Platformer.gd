@@ -3,6 +3,9 @@ class_name Platformer
 
 const BULLET_VELOCITY := 1000
 
+export (int) var walk_speed := 450
+export (int) var jump_speed := 450
+export (int) var air_speed := 450
 export (int) var gravity := 16
 export (int) var terminalVelocity := 750
 export (Vector2) var floorNormal := Vector2(0, -1)
@@ -16,8 +19,9 @@ onready var animation_player := $AnimationPlayer
 onready var sprite := $Sprite
 onready var health := $Health
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed('attack'):
+		get_tree().set_input_as_handled()
 		damage(1)
 		if $AttackCooldown.is_stopped():
 			$AttackCooldown.start()

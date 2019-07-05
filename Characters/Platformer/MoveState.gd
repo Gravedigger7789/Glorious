@@ -1,9 +1,13 @@
 extends PlatformerState
 
-export (int) var walk_speed := 450
+var walk_speed := 450
 
 func _init() -> void:
 	state_name = "move"
+
+func _ready() -> void:
+	walk_speed = owner.walk_speed if "walk_speed" in owner else walk_speed
+	._ready()
 
 func handle_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
